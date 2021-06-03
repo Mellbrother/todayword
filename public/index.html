@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link type="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <h2>チャット</h2>
+    <ul id="messages"></ul>
+    <form id="form">
+      <input id="messageField" autocomplete="off" /><button>
+        チャット送信
+      </button>
+    </form>
+    <form id="stack">
+      <input id="stackField" autocomplete="off" /><button>
+        ヒントのスタック
+      </button>
+    </form>
+    <button id="reset_stack" onclick="resetStack()">スタックの開放</button>
+    <button id="display_stack" onclick="displayStack()">スタックの表示</button>
+
+    <br />
+
+    <h2>お題</h2>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
