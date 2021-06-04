@@ -26,13 +26,13 @@ socket.on("chat message", function (msg) {
   const item = document.createElement("li");
   item.classList.add("text-info");
   item.innerText = msg;
-  document.getElementById("messages").appendChild(item);
+  document.getElementById("messages").prepend(item);
 });
 
 socket.on("hint message", function (msg) {
   const item = document.createElement("li");
   item.innerText = msg;
-  document.getElementById("messages").appendChild(item);
+  document.getElementById("messages").prepend(item);
 });
 
 $("#getTheme").on("click", function () {
@@ -52,8 +52,7 @@ $("#getTheme").on("click", function () {
 
       for (let i = 0; i < data.length; i++) {
         const item = document.createElement("li");
-        item.classList.add("list-group-item");
-        item.innerText = data[i];
+        item.innerText = i + 1 + " : " + data[i];
         document.getElementById("theme").appendChild(item);
       }
       // 通信成功時の処理を記述
@@ -62,3 +61,13 @@ $("#getTheme").on("click", function () {
       // 通信失敗時の処理を記述
     });
 });
+
+function answermode() {
+  document.getElementById("main").style.filter = "blur(10px)";
+  document.getElementById("messages").style.filter = "blur(10px)";
+}
+
+function defaultmode() {
+  document.getElementById("main").style.filter = "";
+  document.getElementById("messages").style.filter = "";
+}

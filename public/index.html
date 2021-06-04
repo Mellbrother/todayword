@@ -8,87 +8,116 @@
       integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
       crossorigin="anonymous"
     />
-    <link type="stylesheet" href="/css/main.css" />
+    <link type="text/css" rel="stylesheet" href="/css/main.css" />
+    <link type="text/css" rel="stylesheet" href="/css/bmesse.css" />
   </head>
   <body>
-    <div class="row">
-      <div class="col-8 mx-auto" style="width: 200px">
-        <h2>お題</h2>
-        <p id="result"></p>
-        <ul id="theme" class="list-group"></ul>
-        <p>
-          テーマ数：<br />
-          <select id="theme_num">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="ml-5 mt-2 mb-2">
+        <a class="navbar-brand" href="#">Team21 奥の細道</a>
+      </div>
+    </nav>
+    <div class="mt-5">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-2">
+          <h1>役割</h1>
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            onclick="answermode()"
+          >
+            回答者</button
+          ><br />
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            onclick="defaultmode()"
+          >
+            状態解除
+          </button>
+        </div>
+
+        <div class="col-6">
+          <h1>お題はなんでしょう？？</h1>
+          <p id="result"></p>
+          <div id="main" class="mb-5 pt-3">
+            <ul id="theme"></ul>
+          </div>
+          テーマ数：
+          <select
+            id="theme_num"
+            class="form-select"
+            aria-label="Default select example"
+          >
             <option value="3">3</option>
             <option value="5">5</option>
             <option value="10">10</option>
           </select>
-        </p>
-        <button id="getTheme" type="button" class="btn btn-outline-info">
-          テーマを引く
-        </button>
-      </div>
-      <div class="col-4">
-        <h2>チャット</h2>
-        <ul id="messages"></ul>
-        <form id="form">
-          <div class="input-group mb-3">
-            <input
-              id="messageField"
-              autocomplete="off"
-              type="text"
-              class="form-control"
-              placeholder="input chat ..."
-              aria-describedby="button-addon2"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn btn-outline-secondary"
-                type="submit"
-                id="button-addon2"
-              >
-                チャット送信
-              </button>
+          <button id="getTheme" type="button" class="mt-2 btn btn-outline-info">
+            テーマを引く
+          </button>
+        </div>
+        <div class="col-3">
+          <h2>チャット</h2>
+          <button
+            id="display_stack"
+            type="button"
+            class="btn btn-outline-primary"
+            onclick="displayStack()"
+          >
+            スタックの表示
+          </button>
+          <button
+            id="reset_stack"
+            type="button"
+            class="btn btn-outline-danger"
+            onclick="resetStack()"
+          >
+            スタックのリセット
+          </button>
+          <div id="your_container">
+            <!-- チャットの外側部分① -->
+            <div id="bms_messages_container">
+              <!-- ヘッダー部分② -->
+              <div id="bms_chat_header">
+                <!--ステータス-->
+              </div>
+
+              <!-- タイムライン部分③ -->
+              <div id="bms_messages">
+                <ul id="messages">
+                  <li>hellow</li>
+                </ul>
+
+                <div class="bms_clear"></div>
+                <!-- 回り込みを解除（スタイルはcssで充てる） -->
+              </div>
+
+              <!-- テキストボックス、送信ボタン④ -->
+              <form id="form">
+                <div class="bms_send">
+                  <textarea
+                    id="messageField"
+                    class="bms_send_message"
+                    placeholder="チャット..."
+                  ></textarea>
+                  <button type="submit" class="bms_send_btn">チャット</button>
+                </div>
+              </form>
+              <form id="stack">
+                <div class="bms_send">
+                  <textarea
+                    id="stackField"
+                    class="bms_send_message"
+                    placeholder="スタック表示ボタンを押したときに表示"
+                  ></textarea>
+                  <button type="submit" class="bms_send_btn">スタック</button>
+                </div>
+              </form>
             </div>
           </div>
-        </form>
-        <form id="stack">
-          <div class="input-group mb-3">
-            <input
-              id="stackField"
-              autocomplete="off"
-              type="text"
-              class="form-control"
-              placeholder="input hint ..."
-              aria-describedby="button-addon2"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn btn-outline-secondary"
-                type="submit"
-                id="button-addon2"
-              >
-                ヒントを送信
-              </button>
-            </div>
-          </div>
-        </form>
-        <button
-          id="reset_stack"
-          type="button"
-          class="btn btn-outline-danger"
-          onclick="resetStack()"
-        >
-          スタックの消去
-        </button>
-        <button
-          id="display_stack"
-          type="button"
-          class="btn btn-outline-primary"
-          onclick="displayStack()"
-        >
-          スタックの表示
-        </button>
+        </div>
       </div>
     </div>
 
