@@ -19,36 +19,6 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/public/index.html"); //　HTMLファイルを使う
 });
 
-app.get("/getTheme", function (req, res) {
-  let result = [];
-  // console.log(req.query.theme_num);
-  // console.log(parseInt(req.query.theme_num));
-  const theme_num = parseInt(req.query.theme_num);
-  // console.log(theme_num);
-  const random_set = [];
-
-  count = 0;
-  while (count < theme_num) {
-    let random = getRandomInt(0, theme.length);
-    if (random_set.includes(random)) {
-      continue;
-    }
-    random_set.push(random);
-    count++;
-  }
-
-  if (theme_num > theme.length) {
-    res.send("Hello World");
-  }
-  // console.log(random_set);
-
-  random_set.forEach((element) => {
-    result.push(theme[element]);
-  });
-  // console.log(result);
-  res.send(result); //　HTMLファイルを使う
-});
-
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -56,22 +26,52 @@ function getRandomInt(min, max) {
 }
 
 io.on("connection", (socket) => {
+  // チャット投稿イベントの受信
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
   });
 
+  // ヒントのスタックイベントの受信
   socket.on("stack message", (msg) => {
     stack_hint.push(msg);
   });
 
+  // スタックのリセットイベントの受信
   socket.on("reset_stack", (msg) => {
     stack_hint = [];
   });
 
+  // スタックの表示イベントの受信
   socket.on("display_stack", (msg) => {
     for (let i = 0; i < stack_hint.length; i++) {
       io.emit("hint message", stack_hint[i]);
     }
+  });
+
+  // テーマを引くイベントの受信
+  socket.on("get theme", (theme_num) => {
+    let result = [];
+    const random_set = [];
+
+    count = 0;
+    while (count < theme_num) {
+      let random = getRandomInt(0, theme.length);
+      if (random_set.includes(random)) {
+        continue;
+      }
+      random_set.push(random);
+      count++;
+    }
+
+    if (theme_num > theme.length) {
+      res.send("Hello World");
+    }
+
+    random_set.forEach((element) => {
+      result.push(theme[element]);
+    });
+
+    io.emit("get theme", result);
   });
 });
 
