@@ -38,3 +38,15 @@ ul {
 #theme_num {
   width: 100px;
 }
+
+#empty-error {
+  color: red;
+}
+
+.box {
+  float: left;
+}
+
+.boxContainer {
+  overflow: hidden;
+}
