@@ -99,6 +99,11 @@ function answermode() {
   document.getElementById("messages").style.filter = "blur(10px)";
 }
 
+function hintmode() {
+  document.getElementById("main").style.filter = "blur(10px)";
+  document.getElementById("messages").style.filter = "";
+}
+
 // 一般モード（ぼかしなし）
 function defaultmode() {
   document.getElementById("main").style.filter = "";
